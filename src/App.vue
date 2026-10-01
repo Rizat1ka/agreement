@@ -419,9 +419,12 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+// Подключаем ранее созданный файл supabase.js
+import { supabase } from './supabase'
 
 const isMenuOpen = ref(false)
 
+// Форма "Представить проект"
 const projectForm = reactive({
   name: '',
   bin: '',
@@ -443,6 +446,7 @@ const projectForm = reactive({
   consent: true
 })
 
+// Форма "Я Инвестор"
 const investorForm = reactive({
   name: '',
   residence: '',
@@ -455,16 +459,95 @@ const investorForm = reactive({
   requirements: ''
 })
 
-// Подготовка под интеграцию с Telegram Bot API или WhatsApp API
-const submitProjectForm = () => {
-  console.log('Отправка проекта:', projectForm)
-  alert('Спасибо! Данные по проекту успешно получены. Специалисты ТОО «AR Agreement» свяжутся с вами.')
-  // Здесь позже добавим вызов axios / fetch для Telegram / WhatsApp
+const isSubmitting = ref(false)
+
+// Отправка формы проекта в таблицу project_applications
+const submitProjectForm = async () => {
+  if (!projectForm.name || !projectForm.phone) {
+    alert('Пожалуйста, заполните основные поля (название и телефон).')
+    return
+  }
+
+  isSubmitting.value = true
+
+  const { error } = await supabase
+    .from('project_applications')
+    .insert([
+      {
+        name: projectForm.name,
+        bin: projectForm.bin,
+        contact_person: projectForm.contactPerson,
+        phone: projectForm.phone,
+        email: projectForm.email,
+        location: projectForm.location,
+        industry: projectForm.industry,
+        stage: projectForm.stage,
+        amount: projectForm.amount,
+        tool: projectForm.tool,
+        own_investment: projectForm.ownInvestment,
+        collateral: projectForm.collateral,
+        revenue: projectForm.revenue,
+        has_business_plan: projectForm.hasBusinessPlan,
+        assets: projectForm.assets,
+        description: projectForm.description,
+        presentation_url: projectForm.presentationUrl
+      }
+    ])
+
+  isSubmitting.value = false
+
+  if (error) {
+    alert('Ошибка отправки проекта: ' + error.message)
+  } else {
+    alert('Спасибо! Данные по проекту успешно получены. Специалисты ТОО «AR Agreement» свяжутся с вами.')
+    
+    // Очистка полей формы
+    Object.keys(projectForm).forEach(key => {
+      if (typeof projectForm[key] === 'boolean') projectForm[key] = true
+      else projectForm[key] = ''
+    })
+    projectForm.hasBusinessPlan = 'Да, в полном объеме'
+    projectForm.tool = 'Инвестиции'
+  }
 }
 
-const submitInvestorForm = () => {
-  console.log('Отправка мандата инвестора:', investorForm)
-  alert('Благодарим! Инвестиционный мандат получен. Мы свяжемся с вами для согласования вариантов.')
-  // Здесь позже добавим вызов axios / fetch для Telegram / WhatsApp
+// Отправка формы инвестора в таблицу investor_applications
+const submitInvestorForm = async () => {
+  if (!investorForm.name || !investorForm.phone) {
+    alert('Пожалуйста, заполните основные поля (ФИО/Наименование компании и телефон).')
+    return
+  }
+
+  isSubmitting.value = true
+
+  const { error } = await supabase
+    .from('investor_applications')
+    .insert([
+      {
+        full_name: investorForm.name,
+        residence: investorForm.residence,
+        phone: investorForm.phone,
+        email: investorForm.email,
+        preferred_industries: investorForm.industries,
+        geography: investorForm.geography,
+        investment_range: investorForm.amountRange,
+        investment_tool: investorForm.tool,
+        mandate_criteria: investorForm.requirements
+      }
+    ])
+
+  isSubmitting.value = false
+
+  if (error) {
+    alert('Ошибка отправки формы инвестора: ' + error.message)
+  } else {
+    alert('Спасибо! Ваш инвестиционный мандат успешно направлен. Специалисты ТОО «AR Agreement» свяжутся с вами.')
+    
+    // Очистка полей формы
+    Object.keys(investorForm).forEach(key => {
+      investorForm[key] = ''
+    })
+    investorForm.tool = 'Вход в капитал (Equity)'
+  }
 }
 </script>
