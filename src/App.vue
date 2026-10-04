@@ -14,7 +14,7 @@
         <li><a href="#industries" @click="isMenuOpen = false">Отрасли</a></li>
         <li><a href="#international" @click="isMenuOpen = false">Международное направление</a></li>
         <li><a href="#project-form" @click="isMenuOpen = false">Представить проект</a></li>
-        <li><a href="#investor-form" @click="isMenuOpen = false">Я инвестор</a></li>
+        <li><a href="#investor-form" @click="isMenuOpen = false">Инвестиционный запрос</a></li>
         <li><a href="#contacts" @click="isMenuOpen = false">Контакты</a></li>
       </ul>
     </div>
@@ -28,8 +28,8 @@
       <p class="subtitle">Соединяем перспективные проекты с капиталом, финансовыми инструментами и стратегическими партнёрами. Сопровождаем деловые инициативы в Казахстане и на международных рынках.</p>
       <div class="hero-buttons">
         <a href="#project-form" class="btn btn-gold"><i class="fas fa-paper-plane"></i> Представить проект</a>
-        <a href="#investor-form" class="btn btn-outline"><i class="fas fa-user-tie"></i> Я инвестор</a>
-        <a href="https://wa.me/77051688831" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Связаться в WhatsApp</a>
+        <a href="#investor-form" class="btn btn-outline"><i class="fas fa-user-tie"></i> Инвестиционный запрос</a>
+        <a href="https://wa.me/77759020439" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Связаться в WhatsApp</a>
       </div>
     </div>
   </section>
@@ -198,166 +198,189 @@
     </div>
   </section>
 
-  <!-- Form: Submit Project -->
-  <section id="project-form">
-    <div class="container">
-      <h2 class="section-title">Представить проект</h2>
-      <div class="form-box">
-        <form @submit.prevent="submitProjectForm">
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Название компании / проекта *</label>
-              <input v-model="projectForm.name" type="text" required placeholder="Наименование">
-            </div>
-            <div class="form-group">
-              <label>БИН или регистрационные данные</label>
-              <input v-model="projectForm.bin" type="text" placeholder="12 цифр БИН">
-            </div>
-            <div class="form-group">
-              <label>ФИО и должность контактного лица *</label>
-              <input v-model="projectForm.contactPerson" type="text" required placeholder="Руководитель / Уполномоченное лицо">
-            </div>
-            <div class="form-group">
-              <label>Телефон / WhatsApp *</label>
-              <input v-model="projectForm.phone" type="tel" required placeholder="+7 700 000 00 00">
-            </div>
-            <div class="form-group">
-              <label>Email *</label>
-              <input v-model="projectForm.email" type="email" required placeholder="example@domain.com">
-            </div>
-            <div class="form-group">
-              <label>Город / Страна</label>
-              <input v-model="projectForm.location" type="text" placeholder="г. Астана, Казахстан">
-            </div>
-            <div class="form-group">
-              <label>Отрасль *</label>
-              <select v-model="projectForm.industry" required>
-                <option value="">Выберите отрасль</option>
-                <option value="Производство">Производство</option>
-                <option value="Сельское хозяйство и АПК">Сельское хозяйство и АПК</option>
-                <option value="Горнодобывающая отрасль">Горнодобывающая отрасль</option>
-                <option value="Энергетика и инфраструктура">Энергетика и инфраструктура</option>
-                <option value="Строительство и недвижимость">Строительство и недвижимость</option>
-                <option value="IT и технологии">IT и технологии</option>
-                <option value="Экология и переработка">Экология и переработка</option>
-                <option value="Логистика и торговля">Логистика и торговля</option>
-                <option value="Другое">Другое</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Текущая стадия проекта</label>
-              <input v-model="projectForm.stage" type="text" placeholder="Стартап / Действующий бизнес / Расширение">
-            </div>
-            <div class="form-group">
-              <label>Требуемая сумма финансирования и валюта *</label>
-              <input v-model="projectForm.amount" type="text" required placeholder="Например: 500 млн KZT / USD">
-            </div>
-            <div class="form-group">
-              <label>Предпочтительный инструмент</label>
-              <select v-model="projectForm.tool">
-                <option value="Инвестиции">Инвестиции</option>
-                <option value="Кредит / Кредитная линия">Кредит / Кредитная линия</option>
-                <option value="Рефинансирование">Рефинансирование</option>
-                <option value="Партнёрство">Партнёрство</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Собственные вложения</label>
-              <input v-model="projectForm.ownInvestment" type="text" placeholder="Сумма или % вложенных средств">
-            </div>
-            <div class="form-group">
-              <label>Залоговое обеспечение</label>
-              <input v-model="projectForm.collateral" type="text" placeholder="Недвижимость, оборудование и т.д.">
-            </div>
-            <div class="form-group">
-              <label>Выручка действующего бизнеса (за последний год)</label>
-              <input v-model="projectForm.revenue" type="text" placeholder="Если применимо">
-            </div>
-            <div class="form-group">
-              <label>Наличие бизнес-плана / ТЭО / финмодели</label>
-              <select v-model="projectForm.hasBusinessPlan">
-                <option value="Да, в полном объеме">Да, в полном объеме</option>
-                <option value="В процессе разработки">В процессе разработки</option>
-                <option value="Отсутствует">Отсутствует</option>
-              </select>
-            </div>
-            <div class="form-group full">
-              <label>Наличие земли, лицензий, разрешений и контрактов</label>
-              <input v-model="projectForm.assets" type="text" placeholder="Укажите имеющиеся активы, гос. акты, лицензии">
-            </div>
-            <div class="form-group full">
-              <label>Краткое описание проекта и цель финансирования</label>
-              <textarea v-model="projectForm.description" rows="4" placeholder="Опишите суть проекта..."></textarea>
-            </div>
-            <div class="form-group full">
-              <label>Ссылка на презентацию / материалы (Google Drive, Yandex Disk и т.д.)</label>
-              <input v-model="projectForm.presentationUrl" type="url" placeholder="https://drive.google.com/...">
-            </div>
+ <!-- Form: Submit Project -->
+<section id="project-form">
+  <div class="container">
+    <h2 class="section-title">Представить проект</h2>
+    <div class="form-box">
+      <form @submit.prevent="submitProjectForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Название компании / проекта *</label>
+            <input v-model="projectForm.name" type="text" required placeholder="Наименование">
           </div>
-          <div style="margin-top: 15px; font-size: 13px; color: #94A3B8;">
-            <input type="checkbox" v-model="projectForm.consent" required id="consent1">
-            <label for="consent1"> Согласие на обработку предоставленных данных</label>
+          <div class="form-group">
+            <label>БИН или регистрационные данные</label>
+            <input v-model="projectForm.bin" type="text" required placeholder="12 цифр БИН">
           </div>
-          <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: 20px;">Отправить проект на рассмотрение</button>
-        </form>
-      </div>
-    </div>
-  </section>
+          <div class="form-group">
+            <label>ФИО и должность контактного лица *</label>
+            <input v-model="projectForm.contactPerson" type="text" required placeholder="Руководитель / Уполномоченное лицо">
+          </div>
+          <div class="form-group">
+            <label>Телефон / WhatsApp *</label>
+            <input v-model="projectForm.phone" type="tel" required placeholder="+7 700 000 00 00">
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input v-model="projectForm.email" type="email" required placeholder="example@domain.com">
+          </div>
+          <div class="form-group">
+            <label>Город / Страна</label>
+            <input v-model="projectForm.location" type="text" required placeholder="г. Астана, Казахстан">
+          </div>
+          <div class="form-group">
+            <label>Отрасль *</label>
+            <select v-model="projectForm.industry" required>
+              <option value="">Выберите отрасль</option>
+              <option value="Производство">Производство</option>
+              <option value="Сельское хозяйство и АПК">Сельское хозяйство и АПК</option>
+              <option value="Горнодобывающая отрасль">Горнодобывающая отрасль</option>
+              <option value="Энергетика и инфраструктура">Энергетика и инфраструктура</option>
+              <option value="Строительство и недвижимость">Строительство и недвижимость</option>
+              <option value="IT и технологии">IT и технологии</option>
+              <option value="Экология и переработка">Экология и переработка</option>
+              <option value="Логистика и торговля">Логистика и торговля</option>
+              <option value="Другое">Другое</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Текущая стадия проекта</label>
+            <input v-model="projectForm.stage" type="text" required placeholder="Стартап / Действующий бизнес / Расширение">
+          </div>
+          <div class="form-group">
+            <label>Требуемая сумма финансирования и валюта *</label>
+            <input v-model="projectForm.amount" type="text" required placeholder="Например: 500 млн KZT / USD">
+          </div>
+          <div class="form-group">
+            <label>Предпочтительный инструмент</label>
+            <select v-model="projectForm.tool">
+              <option value="">Выберите инструмент</option>
+              <option value="Инвестиции">Инвестиции</option>
+              <option value="Кредит / Кредитная линия">Кредит / Кредитная линия</option>
+              <option value="Рефинансирование">Рефинансирование</option>
+              <option value="Партнёрство">Партнёрство</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Собственные вложения</label>
+            <input v-model="projectForm.ownInvestment" type="text" required placeholder="Сумма или % вложенных средств">
+          </div>
+          <div class="form-group">
+            <label>Залоговое обеспечение</label>
+            <input v-model="projectForm.collateral" type="text" required placeholder="Недвижимость, оборудование и т.д.">
+          </div>
+          <div class="form-group">
+            <label>Выручка действующего бизнеса (за последний год)</label>
+            <input v-model="projectForm.revenue" type="text" required placeholder="Если применимо">
+          </div>
+          <div class="form-group">
+            <label>Наличие бизнес-плана / ТЭО / финмодели</label>
+            <select v-model="projectForm.hasBusinessPlan">
+              <option value="">Укажите статус</option>
+              <option value="Да, в полном объеме">Да, в полном объеме</option>
+              <option value="В процессе разработки">В процессе разработки</option>
+              <option value="Отсутствует">Отсутствует</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Наличие земли, лицензий, разрешений и контрактов</label>
+            <input v-model="projectForm.assets" type="text" required placeholder="Укажите имеющиеся активы, гос. акты, лицензии">
+          </div>
+          <div class="form-group full">
+            <label>Краткое описание проекта и цель финансирования</label>
+            <textarea v-model="projectForm.description" rows="4" required placeholder="Опишите суть проекта..."></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Ссылка на презентацию / материалы (Google Drive, Yandex Disk и т.д.)</label>
+            <input v-model="projectForm.presentationUrl" type="url" required placeholder="https://drive.google.com/...">
+          </div>
+        </div>
+        
+        <p style="margin-top: 15px; font-size: 13px; color: #94A3B8; line-height: 1.4;">
+          После отправки заявка попадает в базу AR Agreement для предварительного рассмотрения, первичной экспертизы и подготовки материалов к передаче профильным партнёрам.
+        </p>
 
-  <!-- Form: Investor Mandate -->
-  <section id="investor-form">
-    <div class="container">
-      <h2 class="section-title">Я инвестор</h2>
-      <div class="form-box">
-        <form @submit.prevent="submitInvestorForm">
-          <div class="form-grid">
-            <div class="form-group">
-              <label>ФИО / Наименование компании *</label>
-              <input v-model="investorForm.name" type="text" required placeholder="Имя или название структуры">
-            </div>
-            <div class="form-group">
-              <label>Страна / Резиденство *</label>
-              <input v-model="investorForm.residence" type="text" required placeholder="Казахстан / Другая">
-            </div>
-            <div class="form-group">
-              <label>Телефон / WhatsApp *</label>
-              <input v-model="investorForm.phone" type="tel" required placeholder="+7 700 000 00 00">
-            </div>
-            <div class="form-group">
-              <label>Email *</label>
-              <input v-model="investorForm.email" type="email" required placeholder="investor@domain.com">
-            </div>
-            <div class="form-group">
-              <label>Предпочтительные отрасли</label>
-              <input v-model="investorForm.industries" type="text" placeholder="Производство, Недвижимость, АПК...">
-            </div>
-            <div class="form-group">
-              <label>Интересующая география</label>
-              <input v-model="investorForm.geography" type="text" placeholder="Казахстан, ЦА, Международные рынки">
-            </div>
-            <div class="form-group">
-              <label>Диапазон инвестиций (чека)</label>
-              <input v-model="investorForm.amountRange" type="text" placeholder="например: от $500K до $5M">
-            </div>
-            <div class="form-group">
-              <label>Инвестиционный инструмент</label>
-              <select v-model="investorForm.tool">
-                <option value="Вход в капитал (Equity)">Вход в капитал (Equity)</option>
-                <option value="Заёмное финансирование">Заёмное финансирование</option>
-                <option value="Мезонин">Мезонин</option>
-                <option value="Совместное предприятие (JV)">Совместное предприятие (JV)</option>
-              </select>
-            </div>
-            <div class="form-group full">
-              <label>Требования к доходности / обеспечению и критерии мандата</label>
-              <textarea v-model="investorForm.requirements" rows="3" placeholder="Укажите минимальные требования к проектам..."></textarea>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: 20px;">Направить инвестиционный мандат</button>
-        </form>
-      </div>
+        <div style="margin-top: 15px; font-size: 13px; color: #94A3B8;">
+          <input type="checkbox" v-model="projectForm.consent" required id="consent1">
+          <label for="consent1"> Согласие на обработку предоставленных данных</label>
+        </div>
+        
+        <button type="submit" :disabled="isSubmitting" class="btn btn-gold" style="width: 100%; margin-top: 20px;">
+          {{ isSubmitting ? 'Отправка...' : 'Отправить проект на рассмотрение' }}
+        </button>
+      </form>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Form: Investor Interest -->
+<section id="investor-form">
+  <div class="container">
+    <h2 class="section-title">Сообщить об инвестиционном интересе</h2>
+    <div class="form-box">
+      <form @submit.prevent="submitInvestorForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>ФИО / Наименование компании *</label>
+            <input v-model="investorForm.name" type="text" required placeholder="Имя или название структуры">
+          </div>
+          <div class="form-group">
+            <label>Страна / Резидентство *</label>
+            <input v-model="investorForm.residence" type="text" required placeholder="Казахстан / Другая">
+          </div>
+          <div class="form-group">
+            <label>Телефон / WhatsApp *</label>
+            <input v-model="investorForm.phone" type="tel" required placeholder="+7 700 000 00 00">
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input v-model="investorForm.email" type="email" required placeholder="investor@domain.com">
+          </div>
+          <div class="form-group">
+            <label>Предпочтительные отрасли</label>
+            <input v-model="investorForm.industries" type="text" required placeholder="Производство, Недвижимость, АПК...">
+          </div>
+          <div class="form-group">
+            <label>Интересующая география</label>
+            <input v-model="investorForm.geography" type="text" required placeholder="Казахстан, ЦА, Международные рынки">
+          </div>
+          <div class="form-group">
+            <label>Диапазон инвестиций (чека)</label>
+            <input v-model="investorForm.amountRange" type="text" required placeholder="например: от $500K до $5M">
+          </div>
+          <div class="form-group">
+            <label>Инвестиционный инструмент</label>
+            <select v-model="investorForm.tool">
+              <option value="">Выберите инструмент</option>
+              <option value="Вход в капитал (Equity)">Вход в капитал (Equity)</option>
+              <option value="Заёмное финансирование">Заёмное финансирование</option>
+              <option value="Мезонин">Мезонин</option>
+              <option value="Совместное предприятие (JV)">Совместное предприятие (JV)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Требования к доходности / обеспечению и критерии мандата</label>
+            <textarea v-model="investorForm.requirements" rows="3" required placeholder="Укажите минимальные требования к проектам..."></textarea>
+          </div>
+        </div>
+
+        <p style="margin-top: 15px; font-size: 13px; color: #94A3B8; line-height: 1.4;">
+          AR Agreement осуществляет консультационную и организационную подготовку проектов и не является инвестиционной компанией или инвестором. Инвестиционные предложения передаются профильным партнёрам для дальнейшего рассмотрения.
+        </p>
+
+        <div style="margin-top: 15px; font-size: 13px; color: #94A3B8;">
+          <input type="checkbox" v-model="investorForm.consent" required id="consent2">
+          <label for="consent2"> Согласие на обработку предоставленных данных</label>
+        </div>
+
+        <button type="submit" :disabled="isSubmitting" class="btn btn-gold" style="width: 100%; margin-top: 20px;">
+          {{ isSubmitting ? 'Отправка...' : 'Направить инвестиционный запрос' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 
   <!-- Contacts -->
   <section id="contacts">
@@ -378,13 +401,13 @@
         <div class="contact-box">
           <i class="fas fa-phone-alt"></i>
           <h4>Телефон / WhatsApp</h4>
-          <p><a href="tel:+77051688831">+7 705 168 8831</a></p>
-          <p style="margin-top: 8px;"><a href="https://wa.me/77051688831" target="_blank" style="color: #25D366;"><i class="fab fa-whatsapp"></i> Чат в WhatsApp</a></p>
+          <p><a href="tel:+77759020439">+7 775 902 0439</a></p>
+          <p style="margin-top: 8px;"><a href="https://wa.me/77759020439" target="_blank" style="color: #25D366;"><i class="fab fa-whatsapp"></i> Чат в WhatsApp</a></p>
         </div>
         <div class="contact-box">
           <i class="fas fa-envelope"></i>
           <h4>Email</h4>
-          <p><a href="mailto:ar.agreement@gmail.com">ar.agreement@gmail.com</a>[cite: 3]</p>
+          <p><a href="mailto:ar.agreement@gmail.com">ar.agreement@gmail.com</a></p>
         </div>
       </div>
     </div>
@@ -443,10 +466,10 @@ const projectForm = reactive({
   assets: '',
   description: '',
   presentationUrl: '',
-  consent: true
+  consent: false
 })
 
-// Форма "Я Инвестор"
+// Форма "Инвестиционный запрос"
 const investorForm = reactive({
   name: '',
   residence: '',
@@ -456,15 +479,27 @@ const investorForm = reactive({
   geography: '',
   amountRange: '',
   tool: 'Вход в капитал (Equity)',
-  requirements: ''
+  requirements: '',
+  consent: false
 })
 
 const isSubmitting = ref(false)
 
+// Вспомогательная функция: проверяет, что все поля заполнены и согласие отмечено
+const validateForm = (formData) => {
+  return Object.entries(formData).every(([key, value]) => {
+    if (typeof value === 'boolean') {
+      return value === true // Галочка согласия должна быть обязательно установлена
+    }
+    return typeof value === 'string' && value.trim() !== '' // Текстовые поля не должны быть пустыми
+  })
+}
+
 // Отправка формы проекта в таблицу project_applications
 const submitProjectForm = async () => {
-  if (!projectForm.name || !projectForm.phone) {
-    alert('Пожалуйста, заполните основные поля (название и телефон).')
+  // Проверяем абсолютно ВСЕ поля формы проектов
+  if (!validateForm(projectForm)) {
+    alert('Пожалуйста, заполните все обязательные поля формы и подтвердите согласие.')
     return
   }
 
@@ -499,11 +534,11 @@ const submitProjectForm = async () => {
   if (error) {
     alert('Ошибка отправки проекта: ' + error.message)
   } else {
-    alert('Спасибо! Данные по проекту успешно получены. Специалисты ТОО «AR Agreement» свяжутся с вами.')
+    alert('Спасибо! Данные по проекту успешно получены. Специалисты ТОО «AR Agreement» свяжутся с вами для уточнения деталей.')
     
     // Очистка полей формы
     Object.keys(projectForm).forEach(key => {
-      if (typeof projectForm[key] === 'boolean') projectForm[key] = true
+      if (typeof projectForm[key] === 'boolean') projectForm[key] = false
       else projectForm[key] = ''
     })
     projectForm.hasBusinessPlan = 'Да, в полном объеме'
@@ -513,8 +548,9 @@ const submitProjectForm = async () => {
 
 // Отправка формы инвестора в таблицу investor_applications
 const submitInvestorForm = async () => {
-  if (!investorForm.name || !investorForm.phone) {
-    alert('Пожалуйста, заполните основные поля (ФИО/Наименование компании и телефон).')
+  // Проверяем абсолютно ВСЕ поля формы инвестора
+  if (!validateForm(investorForm)) {
+    alert('Пожалуйста, заполните все обязательные поля формы и подтвердите согласие.')
     return
   }
 
@@ -539,13 +575,14 @@ const submitInvestorForm = async () => {
   isSubmitting.value = false
 
   if (error) {
-    alert('Ошибка отправки формы инвестора: ' + error.message)
+    alert('Ошибка отправки инвестиционного запроса: ' + error.message)
   } else {
-    alert('Спасибо! Ваш инвестиционный мандат успешно направлен. Специалисты ТОО «AR Agreement» свяжутся с вами.')
+    alert('Спасибо! Ваш инвестиционный запрос успешно получен. Специалисты ТОО «AR Agreement» свяжутся с вами.')
     
     // Очистка полей формы
     Object.keys(investorForm).forEach(key => {
-      investorForm[key] = ''
+      if (typeof investorForm[key] === 'boolean') investorForm[key] = false
+      else investorForm[key] = ''
     })
     investorForm.tool = 'Вход в капитал (Equity)'
   }
